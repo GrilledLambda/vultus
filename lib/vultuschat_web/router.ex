@@ -16,8 +16,10 @@ defmodule VultuschatWeb.Router do
 
   scope "/", VultuschatWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+
+    live "/room", CreateRoom
+    live "/:room_id", RoomLive
   end
 
   # Other scopes may use custom stacks.
