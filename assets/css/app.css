@@ -1,6 +1,46 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
+header{
+  font-family: 'DynaPuff', cursive;
+  font-size: large;
+}
+body{
+  font-family: 'Work Sans', sans-serif;
+  font-size: large;
+}
+
+#chat-container {
+  display: flex;
+  border: 1px solid rgb(98, 96, 96);
+  padding: .5em;
+  margin: -1em 1em 1em -1em;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+#chat-messages {
+  flex-grow: 1;
+}
+
+.message {
+  margin: .5em;
+  background: rgb(135, 135, 234);
+  border: 2px solid rgb(135, 135, 234);
+  border-radius: 50px;
+  padding: .5em;
+}
+
+
+
+
+
+
+
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
