@@ -1,4 +1,4 @@
-<p> You're chatting in: <strong><%= @room_id %></strong> </p>
+<p> You're chatting in room: <strong><%= @room_id %></strong> as: <strong><%= @username %></strong> </p>
 
 <div id="room-container">
     <div id="video-container">
@@ -8,13 +8,17 @@
     <div id="chat-container">
         <div id="chat-messages" phx-update="append">
             <%= for message <- @messages do %>
-            <div class="message" id=<%= message.uuid %>><%= message.content %></div>
-            <%= end %>
+            <div class="message" id=<%= message.uuid %> style="background: <%= message.chat_color %>">
+            <%= message.content %>
+            <div class="author" > <%= message.username %> </div>
+            </div>
+
+            <% end %>
         </div>
             <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message %>
             <%# text_input(f, :message) %>
             <%# textarea f, :message, placeholder: "Enter your message..." %>
-            <%= text_input f, :message, placeholder: "Enter your message..." %>
+            <%= text_input f, :message, placeholder: "Enter your message...", autocomplete: "off" %>
             <%# submit "Submit" %>
             </form>
         </div>

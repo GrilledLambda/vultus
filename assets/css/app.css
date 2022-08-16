@@ -10,7 +10,6 @@ body{
   font-size: large;
   height: 100%;
   width: 100%;
-  /* background: #b1c7d2; */
 }
 
 p{
@@ -25,6 +24,7 @@ p{
   /* width: 80vw; */
   border: 1px solid rgb(98, 96, 96);
   border-radius: .5em;
+  
 }
 
 #video-container{
@@ -53,11 +53,12 @@ img {
   border-left: 1px solid rgb(98, 96, 96);
   padding: .25em;
   padding-bottom: 0;
-  max-width: 40%;
+  /* max-width: 40%; */
+  width: 40%;
   /* margin: -1em 1em 1em -1em; */
   flex-direction: column;
   justify-content: center;  
-  overflow: hidden;
+  overflow: auto;
   float: right;
 }
 
@@ -91,12 +92,26 @@ input{
 .message {
   word-wrap: break-word;
   margin: .5em;
-  background: rgb(176, 176, 240);
-  border: 2px solid rgb(135, 135, 234);
-  border-radius: .5em;
+  margin-bottom: auto;
+  background: rgb(196, 209, 250);
+  border: 1px solid rgb(135, 135, 234);
+  /* border-top-left-radius: 0; */
+  border-radius: 0 .5em .5em .5em;
   padding-left: 1em;
   padding-right: 1em;
+  padding-bottom: 0;
 }
+
+.author{
+  margin-top: auto;
+  padding-right: 1em;
+  font-size: small;
+  font-style: bold;
+}
+
+
+
+
 
 
 

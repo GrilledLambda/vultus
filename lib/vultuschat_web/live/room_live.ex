@@ -9,14 +9,18 @@ defmodule VultuschatWeb.RoomLive do
   @impl true
   def mount(%{"room_id" => room_id}, _session, socket) do
     topic = "room:" <> room_id
+    username = MnemonicSlugs.generate_slug(2)
+    chat_color = RandomColor.hex(luminosity: :light)
     if connected?(socket), do: VultuschatWeb.Endpoint.subscribe(topic)
 
     socket = assign(
       socket,
       room_id: room_id,
       topic: topic,
-      messages: [%{uuid: UUID.uuid4(), content: "What's up loser?"}],
-      temporary_assigns: [messages: []] #default state for messages
+      username: username,
+      chat_color: chat_color,
+      messages: [%{uuid: UUID.uuid4(), content: "#{username} joined.", username: username, chat_color: chat_color}],
+      # temporary_assigns: [messages: []] #default state for messages
     )
     {:ok, socket}
   end
@@ -25,7 +29,7 @@ defmodule VultuschatWeb.RoomLive do
 
   @impl true
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
-    message = %{uuid: UUID.uuid4(), content: message}
+    message = %{uuid: UUID.uuid4(), content: message, username: socket.assigns.username, chat_color: socket.assigns.chat_color}
     VultuschatWeb.Endpoint.broadcast(socket.assigns.topic, "new-message", message)
     {:noreply, socket}
   end
