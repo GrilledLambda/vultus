@@ -8,30 +8,94 @@ header{
 body{
   font-family: 'Work Sans', sans-serif;
   font-size: large;
+  height: 100%;
+  width: 100%;
+  /* background: #b1c7d2; */
+}
+
+p{
+  min-width: 100%;
+}
+
+#room-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 600px;
+  /* width: 80vw; */
+  border: 1px solid rgb(98, 96, 96);
+  border-radius: .5em;
+}
+
+#video-container{
+  flex-grow: 1;
+  /* background: rgb(238,174,202); */
+  /* background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
+  object-fit: contain;
+  border-radius: .5em 0  0 .5em;
+}
+#camera{
+  width: 100%;
+  height: 100%;
+  background: url("https://media.giphy.com/media/TvLuZ00OIADoQ/giphy.gif");
+  background-position: center;
+  background-size: cover;
+  border-radius: .5em 0  0 .5em;
+}
+
+img {
+  width:100%;
+  height:100%;
 }
 
 #chat-container {
   display: flex;
-  border: 1px solid rgb(98, 96, 96);
-  padding: .5em;
-  margin: -1em 1em 1em -1em;
+  border-left: 1px solid rgb(98, 96, 96);
+  padding: .25em;
+  padding-bottom: 0;
+  max-width: 40%;
+  /* margin: -1em 1em 1em -1em; */
   flex-direction: column;
-  justify-content: center;
-  height: 500px;
-  overflow: scroll;
-  scroll-behavior: smooth;
+  justify-content: center;  
+  overflow: hidden;
+  float: right;
+}
+
+#chat-messages:nth-child(2n){
+  background: rgb(135, 234, 188) !important;
 }
 
 #chat-messages {
   flex-grow: 1;
 }
 
+#chat-form{
+  /* background: #31708f; */
+  padding: 0;
+  margin: 0;
+  margin-bottom: auto;
+  word-wrap: break-word;
+  word-break: break-all;
+  resize: none;
+  max-height: 20%;
+}
+
+textarea{
+  resize: none;
+  margin-bottom: 0;
+}
+
+input{
+  word-break: break-word;
+}
 .message {
+  word-wrap: break-word;
   margin: .5em;
-  background: rgb(135, 135, 234);
+  background: rgb(176, 176, 240);
   border: 2px solid rgb(135, 135, 234);
-  border-radius: 50px;
-  padding: .5em;
+  border-radius: .5em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 

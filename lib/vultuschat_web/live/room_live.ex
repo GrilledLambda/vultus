@@ -21,6 +21,8 @@ defmodule VultuschatWeb.RoomLive do
     {:ok, socket}
   end
 
+######################## Event Handling ########################
+
   @impl true
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
     message = %{uuid: UUID.uuid4(), content: message}
