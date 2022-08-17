@@ -8,7 +8,7 @@ defmodule VultuschatWeb.RoomLive do
 
   @impl true
   def mount(%{"room_id" => room_id}, _session, socket) do
-
+    #todo Mount is called twice so you see a username change when loading
     topic = "room:" <> room_id
     username = MnemonicSlugs.generate_slug(2)
     chat_color = RandomColor.hex(luminosity: :light)
@@ -25,6 +25,7 @@ defmodule VultuschatWeb.RoomLive do
       topic: topic,
       username: username,
       chat_color: chat_color,
+      user_list: [],
       messages: [],
       temporary_assigns: [messages: []] #default state for messages
     )
@@ -66,8 +67,38 @@ defmodule VultuschatWeb.RoomLive do
       |> Enum.map(fn username -> %{type: :system, uuid: UUID.uuid4(), content: "#{username} left", username: "", chat_color: "#DFDFDF"}
     end)
 
-    socket = assign(socket, messages: join_messages ++ leave_messages)
+    user_list = VultuschatWeb.Presence.list(socket.assigns.topic)
+    socket = assign(socket, messages: join_messages ++ leave_messages, user_list: user_list)
 
     {:noreply, socket}
   end
+
+  def display_message(%{type: :system, uuid: uuid, content: content, chat_color: chat_color}) do
+    ~E"""
+    <div class="message" id=<%= uuid %> style="background: <%= chat_color %>">
+    <em><%= content %></em>
+    </div>
+    """
+  end
+
+  def display_message(%{uuid: uuid, content: content, username: username, chat_color: chat_color}) do
+    ~E"""
+    <div class="message" id=<%= uuid %> style="background: <%= chat_color %>">
+    <%= content %>
+    <div class="author" > <%= username %> </div>
+    </div>
+    """
+  end
+
+  def get_chat_color(user) do
+    #todo there has got to be a better way of doing this shit.
+    user
+    |> elem(1)
+    |> Map.fetch(:metas)
+    |> elem(1)
+    |> List.first()
+    |> Map.fetch(:chat_color)
+    |> elem(1)
+  end
+
 end

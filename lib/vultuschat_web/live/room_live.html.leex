@@ -11,10 +11,7 @@
 
             <%= for message <- @messages do %>
                 <%= if message.content != "" do %>
-                    <div class="message" id=<%= message.uuid %> style="background: <%= message.chat_color %>">
-                        <%= message.content %>
-                        <div class="author" > <%= message.username %> </div>
-                    </div>
+                    <%= display_message(message) %>
                 <% end %>
             <% end %>
 
@@ -31,10 +28,11 @@
 </div>
 
     <div id="active-users">
-        <h1> Online Users: </h1>
-        <div> User 1 </div>
-        <div> User 2 </div>
-        <div> User 3 </div>
+        <h2> Online Users: </h2>
+        <%= for user <- @user_list do %>
+            <div style="background: <%= get_chat_color(user) %> "> <%= elem(user, 0) %> </div>
+        <% end %>
     </div>
+
 
 </div>
