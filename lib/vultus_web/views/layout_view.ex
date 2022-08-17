@@ -1,5 +1,5 @@
-defmodule VultuschatWeb.LayoutView do
-  use VultuschatWeb, :view
+defmodule VultusWeb.LayoutView do
+  use VultusWeb, :view
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.

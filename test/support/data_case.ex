@@ -1,4 +1,4 @@
-defmodule Vultuschat.DataCase do
+defmodule Vultus.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Vultuschat.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Vultuschat.DataCase, async: true`, although
+  by setting `use Vultus.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule Vultuschat.DataCase do
 
   using do
     quote do
-      alias Vultuschat.Repo
+      alias Vultus.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Vultuschat.DataCase
+      import Vultus.DataCase
     end
   end
 
   setup tags do
-    Vultuschat.DataCase.setup_sandbox(tags)
+    Vultus.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,7 +36,7 @@ defmodule Vultuschat.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Vultuschat.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Vultus.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

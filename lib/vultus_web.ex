@@ -1,12 +1,12 @@
-defmodule VultuschatWeb do
+defmodule VultusWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use VultuschatWeb, :controller
-      use VultuschatWeb, :view
+      use VultusWeb, :controller
+      use VultusWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule VultuschatWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: VultuschatWeb
+      use Phoenix.Controller, namespace: VultusWeb
 
       import Plug.Conn
-      import VultuschatWeb.Gettext
-      alias VultuschatWeb.Router.Helpers, as: Routes
+      import VultusWeb.Gettext
+      alias VultusWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/vultuschat_web/templates",
-        namespace: VultuschatWeb
+        root: "lib/vultus_web/templates",
+        namespace: VultusWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +45,7 @@ defmodule VultuschatWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {VultuschatWeb.LayoutView, "live.html"}
+        layout: {VultusWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -80,7 +80,7 @@ defmodule VultuschatWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import VultuschatWeb.Gettext
+      import VultusWeb.Gettext
     end
   end
 
@@ -95,9 +95,9 @@ defmodule VultuschatWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import VultuschatWeb.ErrorHelpers
-      import VultuschatWeb.Gettext
-      alias VultuschatWeb.Router.Helpers, as: Routes
+      import VultusWeb.ErrorHelpers
+      import VultusWeb.Gettext
+      alias VultusWeb.Router.Helpers, as: Routes
     end
   end
 

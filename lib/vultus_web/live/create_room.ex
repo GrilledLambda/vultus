@@ -1,5 +1,5 @@
-defmodule VultuschatWeb.CreateRoom do
-  use VultuschatWeb, :live_view
+defmodule VultusWeb.CreateRoom do
+  use VultusWeb, :live_view
   require Logger
 
   @impl true

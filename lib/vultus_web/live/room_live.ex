@@ -1,9 +1,9 @@
-defmodule VultuschatWeb.RoomLive do
+defmodule VultusWeb.RoomLive do
   @moduledoc """
     This module is responsible for handiling messages and message events.
   """
 
-  use VultuschatWeb, :live_view
+  use VultusWeb, :live_view
   require Logger
 
   @impl true
@@ -14,8 +14,8 @@ defmodule VultuschatWeb.RoomLive do
     chat_color = RandomColor.hex(luminosity: :light)
 
     if connected?(socket) do
-      VultuschatWeb.Endpoint.subscribe(topic)
-      VultuschatWeb.Presence.track(self(), topic, username, %{chat_color: chat_color})
+      VultusWeb.Endpoint.subscribe(topic)
+      VultusWeb.Presence.track(self(), topic, username, %{chat_color: chat_color})
     end
 
     socket = assign(
@@ -37,7 +37,7 @@ defmodule VultuschatWeb.RoomLive do
   @impl true
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
     message = %{uuid: UUID.uuid4(), content: message, username: socket.assigns.username, chat_color: socket.assigns.chat_color}
-    VultuschatWeb.Endpoint.broadcast(socket.assigns.topic, "new-message", message)
+    VultusWeb.Endpoint.broadcast(socket.assigns.topic, "new-message", message)
     {:noreply, assign(socket, message: "")}
   end
 
@@ -67,7 +67,7 @@ defmodule VultuschatWeb.RoomLive do
       |> Enum.map(fn username -> %{type: :system, uuid: UUID.uuid4(), content: "#{username} left", username: "", chat_color: "#DFDFDF"}
     end)
 
-    user_list = VultuschatWeb.Presence.list(socket.assigns.topic)
+    user_list = VultusWeb.Presence.list(socket.assigns.topic)
     socket = assign(socket, messages: join_messages ++ leave_messages, user_list: user_list)
 
     {:noreply, socket}
@@ -83,7 +83,7 @@ defmodule VultuschatWeb.RoomLive do
 
   def display_message(%{uuid: uuid, content: content, username: username, chat_color: chat_color}) do
     ~E"""
-    <div class="message" id=<%= uuid %> style="background: <%= chat_color %>">
+    <div class="message" id=<%= uuid %> style="color: <%= chat_color %>">
     <%= content %>
     <div class="author" > <%= username %> </div>
     </div>

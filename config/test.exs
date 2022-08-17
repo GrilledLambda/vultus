@@ -5,23 +5,23 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :vultuschat, Vultuschat.Repo,
+config :vultus, Vultus.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "vultuschat_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "vultus_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :vultuschat, VultuschatWeb.Endpoint,
+config :vultus, VultusWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "vF7ShKi9CH6MXzJ0NFtabve1QYfVUEjd+JZqth2mcOFQ5ng4FGkdPEzwLms68ynl",
   server: false
 
 # In test we don't send emails.
-config :vultuschat, Vultuschat.Mailer, adapter: Swoosh.Adapters.Test
+config :vultus, Vultus.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn

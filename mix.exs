@@ -1,9 +1,9 @@
-defmodule Vultuschat.MixProject do
+defmodule Vultus.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :vultuschat,
+      app: :vultus,
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Vultuschat.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Vultuschat.Application, []},
+      mod: {Vultus.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

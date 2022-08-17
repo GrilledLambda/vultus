@@ -1,5 +1,5 @@
-defmodule VultuschatWeb.PageControllerTest do
-  use VultuschatWeb.ConnCase
+defmodule VultusWeb.PageControllerTest do
+  use VultusWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

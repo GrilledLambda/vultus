@@ -1,12 +1,12 @@
-defmodule VultuschatWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :vultuschat
+defmodule VultusWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :vultus
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_vultuschat_key",
+    key: "_vultus_key",
     signing_salt: "9papiPym"
   ]
 
@@ -18,7 +18,7 @@ defmodule VultuschatWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :vultuschat,
+    from: :vultus,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -28,7 +28,7 @@ defmodule VultuschatWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :vultuschat
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :vultus
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
@@ -46,5 +46,5 @@ defmodule VultuschatWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug VultuschatWeb.Router
+  plug VultusWeb.Router
 end

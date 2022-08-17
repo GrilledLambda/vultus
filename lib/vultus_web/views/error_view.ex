@@ -1,5 +1,5 @@
-defmodule VultuschatWeb.ErrorView do
-  use VultuschatWeb, :view
+defmodule VultusWeb.ErrorView do
+  use VultusWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

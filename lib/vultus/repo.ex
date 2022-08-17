@@ -1,5 +1,5 @@
-defmodule Vultuschat.Repo do
+defmodule Vultus.Repo do
   use Ecto.Repo,
-    otp_app: :vultuschat,
+    otp_app: :vultus,
     adapter: Ecto.Adapters.Postgres
 end

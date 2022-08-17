@@ -1,6 +1,6 @@
-defmodule Vultuschat do
+defmodule Vultus do
   @moduledoc """
-  Vultuschat keeps the contexts that define your domain
+  Vultus keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

@@ -7,14 +7,14 @@
 # General application configuration
 import Config
 
-config :vultuschat,
-  ecto_repos: [Vultuschat.Repo]
+config :vultus,
+  ecto_repos: [Vultus.Repo]
 
 # Configures the endpoint
-config :vultuschat, VultuschatWeb.Endpoint,
+config :vultus, VultusWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: VultuschatWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Vultuschat.PubSub,
+  render_errors: [view: VultusWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Vultus.PubSub,
   live_view: [signing_salt: "TwkQn7JC"]
 
 # Configures the mailer
@@ -24,7 +24,7 @@ config :vultuschat, VultuschatWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :vultuschat, Vultuschat.Mailer, adapter: Swoosh.Adapters.Local
+config :vultus, Vultus.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

@@ -1,4 +1,4 @@
-# Vultuschat
+# Vultus
 
 To start your Phoenix server:
 

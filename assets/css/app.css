@@ -9,9 +9,9 @@
   height: 100%;
   min-height: 75vh;
   width: 100%;
-  border: 1px solid rgb(98, 96, 96);
+  border: 3px solid rgb(98, 96, 96);
   border-radius: .5em;
-  background: rgb(236 236 236);
+  background: rgba(236, 236, 236, 0.272);
 }
 
 /* ------------------------ Video ------------------------ */
@@ -34,7 +34,7 @@
 /* ------------------------ Misc ------------------------ */
 
 header{
-  font-family: 'DynaPuff', cursive;
+  font-family: 'Aboreto', cursive;
   font-size: large;
   margin: 0;
   margin-bottom: .5em;
@@ -45,13 +45,9 @@ body{
   font-family: 'Work Sans', sans-serif;
   font-size: large;
   height: 100%;
-  /* width: 100%; */
-  /* display: flex; */
   padding: 0%;
-  /* flex-direction: column;
-  align-items: flex-start;
-  justify-content: center; */
-  /* background: rgba(0, 128, 0, 0.333); */
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(66,129,102,1) 25%, rgba(0,44,29,1) 100%);
 }
 
 html, body{
@@ -68,6 +64,7 @@ p{
   margin-top: .5em;
   margin-bottom: .5em;
   min-width: 100%;
+  font-family: 'Rubik', sans-serif;
 }
 
 img {
@@ -120,20 +117,24 @@ input{
   word-break: break-all;
   resize: none;
   max-height: 20%;
+
 }
 
 .message {
   word-wrap: break-word;
   margin: .5em;
   margin-bottom: auto;
-  background: rgb(196, 209, 250);
-  border: 1px solid rgb(135, 135, 234);
+  background: rgba(0, 84, 62, 0.726);
+  border: 2px inset rgb(123 175 159);
   /* border-top-left-radius: 0; */
   border-radius: 0 .5em .5em .5em;
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 0;
   width: auto;
+  box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
+  -webkit-box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
+  -moz-box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
 }
 
 .author{

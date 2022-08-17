@@ -1,5 +1,5 @@
-defmodule VultuschatWeb.LayoutViewTest do
-  use VultuschatWeb.ConnCase, async: true
+defmodule VultusWeb.LayoutViewTest do
+  use VultusWeb.ConnCase, async: true
 
   # When testing helpers, you may want to import Phoenix.HTML and
   # use functions such as safe_to_string() to convert the helper

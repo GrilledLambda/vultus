@@ -1,4 +1,4 @@
-defmodule Vultuschat.Application do
+defmodule Vultus.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,21 +9,21 @@ defmodule Vultuschat.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Vultuschat.Repo,
+      Vultus.Repo,
       # Start the Telemetry supervisor
-      VultuschatWeb.Telemetry,
+      VultusWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Vultuschat.PubSub},
+      {Phoenix.PubSub, name: Vultus.PubSub},
       # Start the Endpoint (http/https)
-      VultuschatWeb.Endpoint,
-      VultuschatWeb.Presence
-      # Start a worker by calling: Vultuschat.Worker.start_link(arg)
-      # {Vultuschat.Worker, arg}
+      VultusWeb.Endpoint,
+      VultusWeb.Presence
+      # Start a worker by calling: Vultus.Worker.start_link(arg)
+      # {Vultus.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Vultuschat.Supervisor]
+    opts = [strategy: :one_for_one, name: Vultus.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -31,7 +31,7 @@ defmodule Vultuschat.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    VultuschatWeb.Endpoint.config_change(changed, removed)
+    VultusWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

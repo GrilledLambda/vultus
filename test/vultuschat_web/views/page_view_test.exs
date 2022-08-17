@@ -1,3 +1,3 @@
-defmodule VultuschatWeb.PageViewTest do
-  use VultuschatWeb.ConnCase, async: true
+defmodule VultusWeb.PageViewTest do
+  use VultusWeb.ConnCase, async: true
 end

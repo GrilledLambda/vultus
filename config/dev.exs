@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-config :vultuschat, Vultuschat.Repo,
+config :vultus, Vultus.Repo,
   username: "postgres",
   password: "1234",
   hostname: "localhost",
-  database: "vultuschat_dev",
+  database: "vultus_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -16,7 +16,7 @@ config :vultuschat, Vultuschat.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :vultuschat, VultuschatWeb.Endpoint,
+config :vultus, VultusWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -54,13 +54,13 @@ config :vultuschat, VultuschatWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :vultuschat, VultuschatWeb.Endpoint,
+config :vultus, VultusWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/vultuschat_web/(live|views)/.*(ex)$",
-      ~r"lib/vultuschat_web/templates/.*(eex)$"
+      ~r"lib/vultus_web/(live|views)/.*(ex)$",
+      ~r"lib/vultus_web/templates/.*(eex)$"
     ]
   ]
 
