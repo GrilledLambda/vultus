@@ -8,22 +8,27 @@
 
     <div id="chat-container">
         <div id="chat-messages" phx-update="append">
-            <%= for message <- @messages do %>
-            <div class="message" id=<%= message.uuid %> style="background: <%= message.chat_color %>">
-            <%= message.content %>
-            <div class="author" > <%= message.username %> </div>
-            </div>
 
+            <%= for message <- @messages do %>
+                <%= if message.content != "" do %>
+                    <div class="message" id=<%= message.uuid %> style="background: <%= message.chat_color %>">
+                        <%= message.content %>
+                        <div class="author" > <%= message.username %> </div>
+                    </div>
+                <% end %>
             <% end %>
+
         </div>
-            <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message %>
-            <%# text_input(f, :message) %>
-            <%# textarea f, :message, placeholder: "Enter your message..." %>
-            <%= text_input f, :message, placeholder: "Enter your message...", autocomplete: "off" %>
-            <%# submit "Submit" %>
-            </form>
-        </div>
+            <div id="input-box">
+                <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
+                <%# text_input(f, :message) %>
+                <%# textarea f, :message, placeholder: "Enter your message..." %>
+                <%= text_input f, :message, value: @message, placeholder: "Enter your message...", autocomplete: "off" %>
+                <%# submit "Submit" %>
+                </form>
+            </div>
     </div>
+</div>
 
     <div id="active-users">
         <h1> Online Users: </h1>

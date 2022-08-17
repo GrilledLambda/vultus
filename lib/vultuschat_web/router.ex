@@ -19,7 +19,7 @@ defmodule VultuschatWeb.Router do
     get "/", PageController, :index
 
     live "/room", CreateRoom
-    live "/:room_id", RoomLive
+    live "/:room_id", RoomLive, :index
   end
 
   # Other scopes may use custom stacks.
