@@ -15,7 +15,8 @@ defmodule Vultuschat.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Vultuschat.PubSub},
       # Start the Endpoint (http/https)
-      VultuschatWeb.Endpoint
+      VultuschatWeb.Endpoint,
+      VultuschatWeb.Presence
       # Start a worker by calling: Vultuschat.Worker.start_link(arg)
       # {Vultuschat.Worker, arg}
     ]

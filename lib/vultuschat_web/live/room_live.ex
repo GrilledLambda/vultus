@@ -11,7 +11,11 @@ defmodule VultuschatWeb.RoomLive do
     topic = "room:" <> room_id
     username = MnemonicSlugs.generate_slug(2)
     chat_color = RandomColor.hex(luminosity: :light)
-    if connected?(socket), do: VultuschatWeb.Endpoint.subscribe(topic)
+
+    if connected?(socket) do
+      VultuschatWeb.Endpoint.subscribe(topic)
+      VultuschatWeb.Presence.track(self(), topic, username, %{chat_color: chat_color})
+    end
 
     socket = assign(
       socket,
@@ -20,7 +24,7 @@ defmodule VultuschatWeb.RoomLive do
       username: username,
       chat_color: chat_color,
       messages: [%{uuid: UUID.uuid4(), content: "#{username} joined.", username: username, chat_color: chat_color}],
-      # temporary_assigns: [messages: []] #default state for messages
+      temporary_assigns: [messages: []] #default state for messages
     )
     {:ok, socket}
   end
@@ -37,6 +41,11 @@ defmodule VultuschatWeb.RoomLive do
   @impl true
   def handle_info(%{event: "new-message", payload: message}, socket) do
     socket = assign(socket, messages: [message])
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info(%{event: "presence_diff", payload: %{joins: joins, leaves: leaves}}, socket) do
     {:noreply, socket}
   end
 end
