@@ -2,9 +2,12 @@
 <p> You're chatting in room: <strong><%= @room_id %></strong> as: <strong><%= @username %></strong> </p>
 
 <div id="room-container">
-    <div id="video-container">
-        <div id="camera">
+    <div id="video-container" phx-update="replace">
+    <%= for user <- @user_list do %>
+        <div class="camera" style="background:<%= get_chat_color(user) %>" >
+        <%= elem(user, 0) %> camera
         </div>
+    <% end %>
     </div>
 
     <div id="chat-container">
