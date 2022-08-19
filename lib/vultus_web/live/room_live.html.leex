@@ -1,7 +1,12 @@
 <body>
+    <header>
+        <h1>VULTUS LIVE</h1>
+        <%# <hr> %>
+    </header>
 <p> You're chatting in room: <strong><%= @room_id %></strong> as: <strong><%= @username %></strong> </p>
 
 <div id="room-container">
+
     <div id="video-container" phx-update="replace">
     <%= for user <- @user_list do %>
         <div class="camera" style="background:<%= get_chat_color(user) %>" >
@@ -20,7 +25,16 @@
             <% end %>
 
         </div>
-            <div id="input-box">
+        <div id="active-users">
+            <h2> Online Users: </h2>
+            <ul>
+            <%= for user <- @user_list do %>
+                <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
+            <% end %>
+        <ul>
+    </div>
+    </div>
+                <div id="input-box">
                 <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
                 <%# text_input(f, :message) %>
                 <%# textarea f, :message, placeholder: "Enter your message..." %>
@@ -28,15 +42,7 @@
                 <%# submit "Submit" %>
                 </form>
             </div>
-    </div>
-    <div id="active-users">
-        <h2> Online Users: </h2>
-        <ul>
-        <%= for user <- @user_list do %>
-            <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
-        <% end %>
-        <ul>
-    </div>
+
 </div>
 </div>
 </body>

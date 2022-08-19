@@ -1,79 +1,76 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
-#room-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* height: 600px; */
-  height: 100%;
-  min-height: 75vh;
-  width: 100%;
-  border: 1px solid rgb(98, 96, 96);
-  border-radius: .5em;
-  color: black;
-  /* background: rgba(236, 236, 236, 0.272); */
-}
+
 
 /* ------------------------ Video ------------------------ */
 
 #video-container{
-  /* min-height: 100%; */
-  flex-grow: 3;
-  flex-direction: row;
+  flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
+}
 
-  object-fit: contain;
-  border-radius: .5em 0  0 .5em;
-  background: black;
+#room-container{
+  border-radius: .5em;
+  height: 90%;
+  max-height: 90%;
+  padding: .5em;
+  display: flex;
+  flex-direction: column;
+
+  /* min-width: 100%; */
+  width: 100%;
+  position: fixed;
 }
 
 .camera{
-  flex-grow: 1;
-  /* opacity: .5 ; */
-  text-align: center;
-  /* width: 100%; */
-  /* height: 100%; */
-  background-position: center;
-  background-size: cover;
+  padding: .5em;
+  margin: .5em;
+  color: black;
   border-radius: .5em;
+  flex-grow: 1;
+  border: 1px solid rgb(255, 255, 255);
+  background: rgba(54, 59, 106, 0.332);
 }
 
 /* ------------------------ Misc ------------------------ */
 
 header{
-  font-family: 'Aboreto', cursive;
-  font-size: large;
-  margin: 0;
-  margin-bottom: .5em;
+  font-family: 'Montserrat', sans-serif;
+  /* padding: .5em; */
   background: none;
 }
 
-body{
-  font-family: 'Work Sans', sans-serif;
-  font-size: large;
-  height: 100%;
-  padding: 0%;
-  
-  background: #131516;
-  color: #d8d4cf;
-
-  /* background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(66,129,102,1) 25%, rgba(0,44,29,1) 100%); */
+h1{
+  position: relative;
 }
 
-html, body{
-  height: 100%;
-  min-height: 100%;
-  padding: .5em;
-  margin: 0;
-  /* background: rgb(137,174,255);
-  background: linear-gradient(51deg, rgba(137,174,255,1) 0%, rgba(218,251,255,1) 100%); */
+body{
+  display: flex;
+  flex-direction: column;
+  /* background: #21283f; */
+  color: rgb(255, 255, 255);
+  /* min-height: 100vh; */
+  /* height: 100vh; */
+  padding: 0%;
+  margin: 0%;
+  background-image: url("https://images4.alphacoders.com/936/thumb-1920-936378.jpg");
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(15px);
+
+  --main-color: #51515191;
+  --darker-main: #46464688;
+  --lighter-main: #606060a0;
+  --input-background: #31313171;
+  --chat-container-background: #2e2d2d93;
 }
 
 p{
   margin: 0;
-  margin-top: .5em;
+  padding: .5em;
+  /* margin-top: .5em; */
   margin-bottom: .5em;
   min-width: 100%;
   font-family: 'Rubik', sans-serif;
@@ -84,39 +81,38 @@ img {
   height:100%;
 }
 
-textarea{
-  resize: none;
-  margin-bottom: 0;
-}
 
 input{
   word-break: break-word;
+  font-size: 1em;
 }
 
 /* ------------------------ Chat & Messages ------------------------ */
 
-#chat-container {
+#chat-container{
+  background: rgba(54, 59, 106, 0.332);
+  max-height: 35%;
+  min-height: 15%;
+  border-radius: .5em;
   display: flex;
-  border-left: 1px solid rgb(98, 96, 96);
-  padding: .25em;
-  padding-bottom: 0;
-  flex-wrap: wrap;
-  min-width: 25%;
-  max-width: 25%;
+  padding: .5em;
   flex-direction: row;
-  justify-content: space-between;  
+  justify-content: center;
+
 }
 
 #chat-messages {
+  padding: .5em;
   flex-grow: 1;
   overflow: auto;
-  max-height: 90%;
-  width: 100%;
 }
 
-#input-box{
-  width: 100%;
-  margin-top: auto;
+#input-box input{
+  min-width: 100%;
+  min-height: 2.5em;
+  background: var(--input-background);
+  color: whitesmoke;
+  margin-top: .5em;
 }
 
 #chat-form{
@@ -132,21 +128,18 @@ input{
 
 }
 
-.message {
-  word-wrap: break-word;
-  margin: .5em;
-  margin-bottom: auto;
-  border: 2px inset rgb(255, 255, 255);
-  
-
+.message{
+  color: black;
+  margin-top: .5em;
+  padding: .5em 20em .5em .5em;
   border-radius: 0 .5em .5em .5em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-bottom: 0;
-  width: auto;
-  box-shadow: 6px -6px 33px 0px rgba(0,0,0,0.26) inset;
-  -webkit-box-shadow: 6px -6px 33px 0px rgba(0,0,0,0.26) inset;
-  -moz-box-shadow: 6px -6px 33px 0px rgba(0,0,0,0.26) inset;
+  font-weight: 500;
+  font-size: 1.1em;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  -webkit-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  -moz-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  border-left: 3px solid rgb(152, 152, 152);
 }
 
 .author{
@@ -159,22 +152,11 @@ input{
 /* ------------------------ Active Users ------------------------ */
 
 #active-users{
-  /* flex-grow: 3; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* margin-top: .5em; */
-  min-width: 15%;
-  max-width: 20%;
-  width: auto;
-  border-left: 1px solid grey;
-  border-radius: 0 .5em .5em 0;
-  /* border-radius: .5em; */
-  /* height: 200px; */
+  width: 20%;
+  padding: .5em;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: .5em;
   overflow: auto;
-  padding: 1em;
-  font-weight: 700;
-  /* background: rgba(0, 0, 0, 0.505); */
 }
 
 #active-users h2{
@@ -197,138 +179,10 @@ ul li::before{
 
 
 .active-user{
-    /* filter: brightness(90%); this essentially darkens the colors */
-    /* border: 1px solid grey;
-    border-radius: .5em; */
-
-    margin: 0%;
-    padding: .2em;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Alerts and form errors used by phx.new */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
-}
-.invalid-feedback {
-  color: #a94442;
-  display: block;
-  margin: -1rem 0 2rem;
-}
-
-/* LiveView specific classes for your customization */
-.phx-no-feedback.invalid-feedback,
-.phx-no-feedback .invalid-feedback {
-  display: none;
-}
-
-.phx-click-loading {
-  opacity: 0.5;
-  transition: opacity 1s ease-out;
-}
-
-.phx-loading{
-  cursor: wait;
-}
-
-.phx-modal {
-  opacity: 1!important;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
-.phx-modal-content {
-  background-color: #fefefe;
-  margin: 15vh auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.phx-modal-close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.phx-modal-close:hover,
-.phx-modal-close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.fade-in-scale {
-  animation: 0.2s ease-in 0s normal forwards 1 fade-in-scale-keys;
-}
-
-.fade-out-scale {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-scale-keys;
-}
-
-.fade-in {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;
-}
-.fade-out {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
-}
-
-@keyframes fade-in-scale-keys{
-  0% { scale: 0.95; opacity: 0; }
-  100% { scale: 1.0; opacity: 1; }
-}
-
-@keyframes fade-out-scale-keys{
-  0% { scale: 1.0; opacity: 1; }
-  100% { scale: 0.95; opacity: 0; }
-}
-
-@keyframes fade-in-keys{
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes fade-out-keys{
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+    padding-left: 2em;
+    min-width: 20%;
+    font-size: 1.3em;
+    /* padding: .5em; */
+    border-left: 1px solid rgb(118, 118, 118);
+    border-radius: .5em;
 }

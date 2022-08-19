@@ -8,11 +8,17 @@ defmodule VultusWeb.Router do
     plug :put_root_layout, {VultusWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    # plug: :put_layout, false
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
+
+  # pipeline :no_layout do
+  #   plug: :put_layout, false
+
+  # end
 
   scope "/", VultusWeb do
     pipe_through :browser
