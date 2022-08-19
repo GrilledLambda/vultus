@@ -6,9 +6,12 @@
 /* ------------------------ Video ------------------------ */
 
 #video-container{
+  justify-content: space-between;
+  /* align-items: center; */
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
+  /* max-height: 60%; */
 }
 
 #room-container{
@@ -25,6 +28,8 @@
 }
 
 .camera{
+  width: 20%;
+  /* height: 50%; */
   padding: .5em;
   margin: .5em;
   color: black;
@@ -40,10 +45,12 @@ header{
   font-family: 'Montserrat', sans-serif;
   /* padding: .5em; */
   background: none;
+  margin: 0%;
 }
 
 h1{
-  position: relative;
+  /* position: relative; */
+  /* padding: .5em; */
 }
 
 body{

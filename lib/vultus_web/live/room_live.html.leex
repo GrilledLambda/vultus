@@ -9,7 +9,7 @@
 
     <div id="video-container" phx-update="replace">
     <%= for user <- @user_list do %>
-        <div class="camera" style="background:<%= get_chat_color(user) %>" >
+        <div class="camera" style="background:<%#= get_chat_color(user) %>" >
         <%= elem(user, 0) %> camera
         </div>
     <% end %>
