@@ -16,11 +16,29 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  /* width: 100%; */
+  /* max-height: 100%; */
   margin: .25em;
   /* max-height: 60%; */
   padding: 0%;
   border: 1px solid  var(--border-color);
   border-radius: .5em;
+}
+
+.video-stream{
+  object-fit: fill;
+}
+
+video {
+  flex-grow: 1;
+  /* override other styles to make responsive */
+  width: auto      !important;
+  height: auto     !important;
+  max-height: 100% !important;
+  border-radius: 1em;
+  border: 3px solid rgba(4, 150, 194, 0.488);
+  /* transform: rotateY(180deg); */
+  /* --aspect-ratio: 7 / 4 !important; */
 }
 
 #room-container{
@@ -37,6 +55,10 @@
 }
 
 .camera{
+  max-height: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20%;
   /* height:min-content; */
   margin: .2em;

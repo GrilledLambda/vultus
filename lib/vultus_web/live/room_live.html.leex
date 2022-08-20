@@ -10,7 +10,7 @@
     <div id="video-container" phx-update="replace">
     <%= for user <- @user_list do %>
         <div class="camera" style="background:<%#= get_chat_color(user) %>" >
-        <%= elem(user, 0) %> camera
+        <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
         </div>
     <% end %>
     </div>
@@ -32,11 +32,15 @@
             </div>
         </div>
         <div id="active-users">
+
             <h2> Online Users: </h2>
+            <button id="join-button" class="button" phx-hook="JoinCall">Join Call</button>
+            <hr>
             <ul>
             <%= for user <- @user_list do %>
                 <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
             <% end %>
+
         <ul>
     </div>
     </div>
