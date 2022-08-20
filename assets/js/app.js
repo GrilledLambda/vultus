@@ -9,6 +9,8 @@ import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
+
+//---------------------------- Local Stream -----------------------------//
 async function initStream() {
     try{
         // Gets local media from browser and stores it in steam.
@@ -34,6 +36,38 @@ Hooks.JoinCall = {
         initStream();
     }
 }
+
+//---------------------------- Remote Stream -----------------------------//
+
+var users = {};
+
+function addUserConnection(userUuid) {
+    if (users[userUuid] === undefined){
+        users[userUuid] = {
+            peerConnection: null
+        }
+    }
+    return users
+}
+
+function removeUserConnection(userUuid){
+    delete users[userUuid]
+    return users
+}
+
+Hooks.InitUser = {
+    mounted() {
+        addUserConnection(this.el.dataset.userUuidq)
+    },
+
+    destroyed() {
+        removeUserConnection();
+    }
+}
+
+
+
+
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 // Show progress bar on live navigation and form submits

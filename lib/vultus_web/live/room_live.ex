@@ -12,10 +12,11 @@ defmodule VultusWeb.RoomLive do
     topic = "room:" <> room_id
     username = MnemonicSlugs.generate_slug(2)
     chat_color = RandomColor.hex(luminosity: :light)
+    uuid = UUID.uuid4()
 
     if connected?(socket) do
       VultusWeb.Endpoint.subscribe(topic)
-      VultusWeb.Presence.track(self(), topic, username, %{chat_color: chat_color})
+      VultusWeb.Presence.track(self(), topic, username, %{chat_color: chat_color, uuid: uuid})
     end
 
     socket = assign(
@@ -24,6 +25,7 @@ defmodule VultusWeb.RoomLive do
       message: "", #for clearing text input
       topic: topic,
       username: username,
+      uuid: uuid,
       chat_color: chat_color,
       user_list: [],
       messages: [],
@@ -70,6 +72,10 @@ defmodule VultusWeb.RoomLive do
     user_list = VultusWeb.Presence.list(socket.assigns.topic)
     socket = assign(socket, messages: join_messages ++ leave_messages, user_list: user_list)
 
+    for user <- user_list do
+      IO.inspect(user)
+    end
+
     {:noreply, socket}
   end
 
@@ -90,14 +96,14 @@ defmodule VultusWeb.RoomLive do
     """
   end
 
-  def get_chat_color(user) do
+  def get_user_meta(user, meta_key) do
     #todo there has got to be a better way of doing this shit.
     user
     |> elem(1)
     |> Map.fetch(:metas)
     |> elem(1)
     |> List.first()
-    |> Map.fetch(:chat_color)
+    |> Map.fetch(meta_key)
     |> elem(1)
   end
 

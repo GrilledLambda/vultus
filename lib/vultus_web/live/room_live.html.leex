@@ -8,10 +8,16 @@
 <div id="room-container">
 
     <div id="video-container" phx-update="replace">
+            <div class="camera">
+                <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
+            </div>
     <%= for user <- @user_list do %>
-        <div class="camera" style="background:<%#= get_chat_color(user) %>" >
-        <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
-        </div>
+        <%# if get_user_meta(user, :uuid) != @uuid do %>
+        <%#= Phoenix.Socket :log %>
+            <div class="camera" style="background:<%#= get_user_meta(user, :chat_color) %>" >
+                <video class="video-stream" id="video-remote-<%= get_user_meta(user, :uuid) %>" data-user-uuid="<%= get_user_meta(user, :uuid) %>"  playsinline autoplay phx-hook="InitUser"></video>
+            </div>
+        <%# end %>
     <% end %>
     </div>
 
@@ -38,7 +44,7 @@
             <hr>
             <ul>
             <%= for user <- @user_list do %>
-                <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
+                <li class="active-user" style="color:<%= get_user_meta(user, :chat_color) %>"><%= elem(user, 0) %></li>
             <% end %>
 
         <ul>
