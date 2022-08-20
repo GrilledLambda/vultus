@@ -64,7 +64,7 @@ defmodule VultusWeb.RoomLive do
     leave_messages =
       leaves
       |> Map.keys()
-      |> Enum.map(fn username -> %{type: :system, uuid: UUID.uuid4(), content: "#{username} left", username: "", chat_color: "#DFDFDF"}
+      |> Enum.map(fn username -> %{type: :system, uuid: UUID.uuid4(), content: "#{username} left", username: "", chat_color: "#828282"}
     end)
 
     user_list = VultusWeb.Presence.list(socket.assigns.topic)
@@ -83,7 +83,7 @@ defmodule VultusWeb.RoomLive do
 
   def display_message(%{uuid: uuid, content: content, username: username, chat_color: chat_color}) do
     ~E"""
-    <div class="message" id=<%= uuid %> style="color: <%= chat_color %>">
+    <div class="message" id=<%= uuid %> style="background: <%= chat_color %>">
     <%= content %>
     <div class="author" > <%= username %> </div>
     </div>

@@ -1,39 +1,50 @@
 <body>
+    <header>
+        <h1>VULTUS LIVE</h1>
+        <%# <hr> %>
+    </header>
 <p> You're chatting in room: <strong><%= @room_id %></strong> as: <strong><%= @username %></strong> </p>
 
 <div id="room-container">
-    <div id="video-container">
-        <div id="camera">
+
+    <div id="video-container" phx-update="replace">
+    <%= for user <- @user_list do %>
+        <div class="camera" style="background:<%#= get_chat_color(user) %>" >
+        <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
         </div>
+    <% end %>
     </div>
 
     <div id="chat-container">
-        <div id="chat-messages" phx-update="append">
+        <div id="chat">
+            <div id="chat-messages" phx-update="append">
 
-            <%= for message <- @messages do %>
-                <%= if message.content != "" do %>
-                    <%= display_message(message) %>
+                <%= for message <- @messages do %>
+                    <%= if message.content != "" do %>
+                        <%= display_message(message) %>
+                    <% end %>
                 <% end %>
+            </div>
+            <div id="input-box">
+                        <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
+                        <%= text_input f, :message, value: @message, placeholder: "Enter your message...", autocomplete: "off" %>
+                    </form>
+            </div>
+        </div>
+        <div id="active-users">
+
+            <h2> Online Users: </h2>
+            <button id="join-button" class="button" phx-hook="JoinCall">Join Call</button>
+            <hr>
+            <ul>
+            <%= for user <- @user_list do %>
+                <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
             <% end %>
 
-        </div>
-            <div id="input-box">
-                <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
-                <%# text_input(f, :message) %>
-                <%# textarea f, :message, placeholder: "Enter your message..." %>
-                <%= text_input f, :message, value: @message, placeholder: "Enter your message...", autocomplete: "off" %>
-                <%# submit "Submit" %>
-                </form>
-            </div>
-    </div>
-    <div id="active-users">
-        <h2> Online Users: </h2>
-        <ul>
-        <%= for user <- @user_list do %>
-            <li class="active-user" style="color:<%= get_chat_color(user) %>"><%= elem(user, 0) %></li>
-        <% end %>
         <ul>
     </div>
+    </div>
+
 </div>
 </div>
 </body>

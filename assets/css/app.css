@@ -1,67 +1,121 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
-#room-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* height: 600px; */
-  height: 100%;
-  min-height: 75vh;
-  width: 100%;
-  border: 3px solid rgb(98, 96, 96);
-  border-radius: .5em;
-  background: rgba(236, 236, 236, 0.272);
+* { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+   box-sizing: border-box; 
 }
 
 /* ------------------------ Video ------------------------ */
 
 #video-container{
-  flex-grow: 3;
-  object-fit: contain;
-  border-radius: .5em 0  0 .5em;
+  justify-content: space-around;
+  /* align-items: center; */
+  flex-grow: 2;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* width: 100%; */
+  /* max-height: 100%; */
+  margin: .25em;
+  /* max-height: 60%; */
+  padding: 0%;
+  border: 1px solid  var(--border-color);
+  border-radius: .5em;
 }
 
-#camera{
+.video-stream{
+  object-fit: fill;
+}
+
+video {
+  flex-grow: 1;
+  /* override other styles to make responsive */
+  width: auto      !important;
+  height: auto     !important;
+  max-height: 100% !important;
+  border-radius: 1em;
+  border: 3px solid rgba(4, 150, 194, 0.488);
+  /* transform: rotateY(180deg); */
+  /* --aspect-ratio: 7 / 4 !important; */
+}
+
+#room-container{
+  border-radius: .5em;
+  height: 90%;
+  max-height: 90%;
+  padding: .5em;
+  display: flex;
+  flex-direction: row;
+
+  /* min-width: 100%; */
   width: 100%;
-  height: 100%;
-  background: url("https://media.giphy.com/media/motnLx3NDhfoSfuWXF/giphy.gif");
-  background-position: center;
-  background-size: cover;
-  border-radius: .5em 0  0 .5em;
+  position: fixed;
+}
+
+.camera{
+  max-height: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  /* height:min-content; */
+  margin: .2em;
+  color: rgb(255, 255, 255);
+  border-radius: .5em;
+  flex-grow: 1;
+  /* border: 1px solid rgb(255, 255, 255); */
+  background: rgba(54, 59, 106, 0.358);
+
+  box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
+  -webkit-box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
+  -moz-box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
 }
 
 /* ------------------------ Misc ------------------------ */
 
 header{
-  font-family: 'Aboreto', cursive;
-  font-size: large;
-  margin: 0;
-  margin-bottom: .5em;
+  font-family: 'Montserrat', sans-serif;
+  /* padding: .5em; */
   background: none;
+  margin: 0% !important;
+}
+
+header h1{
+  text-align: center;
+  padding-top: .5em;
+  margin: 0 !important;
+  /* line-height: 0% !important; */
 }
 
 body{
-  font-family: 'Work Sans', sans-serif;
-  font-size: large;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background: #21283f; */
+  color: rgb(255, 255, 255);
+  /* min-height: 100vh; */
+  /* height: 100vh; */
   padding: 0%;
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(66,129,102,1) 25%, rgba(0,44,29,1) 100%);
-}
+  margin: 0%;
+  background-image: url("https://cutewallpaper.org/23/abstarck-blue-wallpaper/1168611698.jpg");
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(25px);
 
-html, body{
-  height: 100%;
-  min-height: 100%;
-  padding: .5em;
-  margin: 0;
-  /* background: rgb(137,174,255);
-  background: linear-gradient(51deg, rgba(137,174,255,1) 0%, rgba(218,251,255,1) 100%); */
+  --main-color: #51515191;
+  --darker-main: #46464688;
+  --lighter-main: #606060a0;
+  --input-background: #31313171;
+  --chat-container-background: #2e2d2d93;
+  --border-color: rgb(255 255 255 / 19%);
 }
 
 p{
+  text-align: center;
   margin: 0;
-  margin-top: .5em;
+  padding: .5em;
+  /* margin-top: .5em; */
   margin-bottom: .5em;
   min-width: 100%;
   font-family: 'Rubik', sans-serif;
@@ -72,43 +126,63 @@ img {
   height:100%;
 }
 
-textarea{
-  resize: none;
-  margin-bottom: 0;
-}
 
 input{
   word-break: break-word;
+  font-size: 1em;
 }
 
 /* ------------------------ Chat & Messages ------------------------ */
 
-#chat-container {
+
+
+#chat-container{
+  margin: .25em;
+  width: 10%;
+  flex-grow: 1;
+  background: rgba(54, 59, 106, 0.332);
+  border-radius: .5em;
   display: flex;
-  border-left: 1px solid rgb(98, 96, 96);
-  padding: .25em;
-  padding-bottom: 0;
-  flex-wrap: wrap;
-  min-width: 25%;
-  max-width: 25%;
+  padding: 0%;
   flex-direction: row;
-  justify-content: space-between;  
+  justify-content: center;
+    border: 1px solid var(--border-color);
+}
+
+#chat{
+  max-width: 60%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0%;
+  padding: 0%;
+  border-radius: .5em;
 }
 
 #chat-messages {
   flex-grow: 1;
   overflow: auto;
-  max-height: 90%;
-  width: 100%;
+  padding: .5em;
 }
 
-#input-box{
+#input-box input{
   width: 100%;
-  margin-top: auto;
+  min-height: 2.5em;
+  background: var(--input-background);
+  color: whitesmoke;
+  margin: auto;
+  border: none;
+  /* border-top: 1px solid var(--border-color); */
+
+  border-radius: .5em;
+  /* margin: .5em; */
 }
 
 #chat-form{
-  /* background: #31708f; */
+  /* background: #828282; */
+
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   margin-bottom: auto;
@@ -120,21 +194,19 @@ input{
 
 }
 
-.message {
-  word-wrap: break-word;
-  margin: .5em;
-  margin-bottom: auto;
-  background: rgba(0, 84, 62, 0.726);
-  border: 2px inset rgb(123 175 159);
-  /* border-top-left-radius: 0; */
+.message{
+  min-width: 100%;
+  color: black;
+  margin-top: .5em;
+  padding: .5em;
   border-radius: 0 .5em .5em .5em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-bottom: 0;
-  width: auto;
-  box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
-  -webkit-box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
-  -moz-box-shadow: 18px -4px 25px 0px rgba(0,0,0,0.29) inset;
+  font-weight: 500;
+  font-size: 1.1em;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  -webkit-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  -moz-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
+  border-left: 3px solid var(--border-color);
 }
 
 .author{
@@ -147,24 +219,18 @@ input{
 /* ------------------------ Active Users ------------------------ */
 
 #active-users{
-  /* flex-grow: 3; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* margin-top: .5em; */
-  min-width: 15%;
-  max-width: 20%;
-  width: auto;
-  border-left: 1px solid grey;
-  border-radius: 0 .5em .5em 0;
-  /* border-radius: .5em; */
-  /* height: 200px; */
+  flex-grow: 1;
+  width: 35%;
+  
+  padding: .5em;
+  border: 1px solid var(--border-color);
+  border-radius: .5em;
   overflow: auto;
-  padding: 1em;
-  font-weight: 700;
-  /* background: rgba(0, 0, 0, 0.505); */
 }
 
+#active-users h2{
+  color: whitesmoke;
+}
 ul {
   list-style: none; /* Remove default bullets */
 }
@@ -182,138 +248,10 @@ ul li::before{
 
 
 .active-user{
-    /* filter: brightness(90%); this essentially darkens the colors */
-    /* border: 1px solid grey;
-    border-radius: .5em; */
-
-    margin: 0%;
-    padding: .2em;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Alerts and form errors used by phx.new */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
-}
-.invalid-feedback {
-  color: #a94442;
-  display: block;
-  margin: -1rem 0 2rem;
-}
-
-/* LiveView specific classes for your customization */
-.phx-no-feedback.invalid-feedback,
-.phx-no-feedback .invalid-feedback {
-  display: none;
-}
-
-.phx-click-loading {
-  opacity: 0.5;
-  transition: opacity 1s ease-out;
-}
-
-.phx-loading{
-  cursor: wait;
-}
-
-.phx-modal {
-  opacity: 1!important;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
-.phx-modal-content {
-  background-color: #fefefe;
-  margin: 15vh auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.phx-modal-close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.phx-modal-close:hover,
-.phx-modal-close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.fade-in-scale {
-  animation: 0.2s ease-in 0s normal forwards 1 fade-in-scale-keys;
-}
-
-.fade-out-scale {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-scale-keys;
-}
-
-.fade-in {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;
-}
-.fade-out {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
-}
-
-@keyframes fade-in-scale-keys{
-  0% { scale: 0.95; opacity: 0; }
-  100% { scale: 1.0; opacity: 1; }
-}
-
-@keyframes fade-out-scale-keys{
-  0% { scale: 1.0; opacity: 1; }
-  100% { scale: 0.95; opacity: 0; }
-}
-
-@keyframes fade-in-keys{
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes fade-out-keys{
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+    padding-left: 2em;
+    min-width: 20%;
+    font-size: 1.3em;
+    /* padding: .5em; */
+    border-left: 1px solid var(--border-color);
+    border-radius: .5em;
 }
