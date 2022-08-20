@@ -1,17 +1,26 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
-
+* { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+   box-sizing: border-box; 
+}
 
 /* ------------------------ Video ------------------------ */
 
 #video-container{
-  justify-content: space-between;
+  justify-content: space-around;
   /* align-items: center; */
-  flex-grow: 1;
+  flex-grow: 2;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  margin: .25em;
   /* max-height: 60%; */
+  padding: 0%;
+  border: 1px solid  var(--border-color);
+  border-radius: .5em;
 }
 
 #room-container{
@@ -20,7 +29,7 @@
   max-height: 90%;
   padding: .5em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   /* min-width: 100%; */
   width: 100%;
@@ -29,14 +38,17 @@
 
 .camera{
   width: 20%;
-  /* height: 50%; */
-  padding: .5em;
-  margin: .5em;
-  color: black;
+  /* height:min-content; */
+  margin: .2em;
+  color: rgb(255, 255, 255);
   border-radius: .5em;
   flex-grow: 1;
-  border: 1px solid rgb(255, 255, 255);
-  background: rgba(54, 59, 106, 0.332);
+  /* border: 1px solid rgb(255, 255, 255); */
+  background: rgba(54, 59, 106, 0.358);
+
+  box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
+  -webkit-box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
+  -moz-box-shadow: 10px 10px 38px -16px rgba(0,0,0,0.75) inset;
 }
 
 /* ------------------------ Misc ------------------------ */
@@ -45,12 +57,14 @@ header{
   font-family: 'Montserrat', sans-serif;
   /* padding: .5em; */
   background: none;
-  margin: 0%;
+  margin: 0% !important;
 }
 
-h1{
-  /* position: relative; */
-  /* padding: .5em; */
+header h1{
+  text-align: center;
+  padding-top: .5em;
+  margin: 0 !important;
+  /* line-height: 0% !important; */
 }
 
 body{
@@ -62,19 +76,21 @@ body{
   /* height: 100vh; */
   padding: 0%;
   margin: 0%;
-  background-image: url("https://images4.alphacoders.com/936/thumb-1920-936378.jpg");
+  background-image: url("https://cutewallpaper.org/23/abstarck-blue-wallpaper/1168611698.jpg");
   background-position: center;
   background-size: cover;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(25px);
 
   --main-color: #51515191;
   --darker-main: #46464688;
   --lighter-main: #606060a0;
   --input-background: #31313171;
   --chat-container-background: #2e2d2d93;
+  --border-color: rgb(255 255 255 / 19%);
 }
 
 p{
+  text-align: center;
   margin: 0;
   padding: .5em;
   /* margin-top: .5em; */
@@ -96,34 +112,55 @@ input{
 
 /* ------------------------ Chat & Messages ------------------------ */
 
+
+
 #chat-container{
+  margin: .25em;
+  width: 10%;
+  flex-grow: 1;
   background: rgba(54, 59, 106, 0.332);
-  max-height: 35%;
-  min-height: 15%;
   border-radius: .5em;
   display: flex;
-  padding: .5em;
+  padding: 0%;
   flex-direction: row;
   justify-content: center;
+    border: 1px solid var(--border-color);
+}
 
+#chat{
+  max-width: 60%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0%;
+  padding: 0%;
+  border-radius: .5em;
 }
 
 #chat-messages {
-  padding: .5em;
   flex-grow: 1;
   overflow: auto;
+  padding: .5em;
 }
 
 #input-box input{
-  min-width: 100%;
+  width: 100%;
   min-height: 2.5em;
   background: var(--input-background);
   color: whitesmoke;
-  margin-top: .5em;
+  margin: auto;
+  border: none;
+  /* border-top: 1px solid var(--border-color); */
+
+  border-radius: .5em;
+  /* margin: .5em; */
 }
 
 #chat-form{
   /* background: #828282; */
+
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   margin-bottom: auto;
@@ -136,9 +173,10 @@ input{
 }
 
 .message{
+  min-width: 100%;
   color: black;
   margin-top: .5em;
-  padding: .5em 20em .5em .5em;
+  padding: .5em;
   border-radius: 0 .5em .5em .5em;
   font-weight: 500;
   font-size: 1.1em;
@@ -146,7 +184,7 @@ input{
   box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
   -webkit-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
   -moz-box-shadow: 24px -26px 9px -15px rgba(0,0,0,0.27) inset;
-  border-left: 3px solid rgb(152, 152, 152);
+  border-left: 3px solid var(--border-color);
 }
 
 .author{
@@ -159,9 +197,11 @@ input{
 /* ------------------------ Active Users ------------------------ */
 
 #active-users{
-  width: 20%;
+  flex-grow: 1;
+  width: 35%;
+  
   padding: .5em;
-  border: 1px solid rgb(118, 118, 118);
+  border: 1px solid var(--border-color);
   border-radius: .5em;
   overflow: auto;
 }
@@ -190,6 +230,6 @@ ul li::before{
     min-width: 20%;
     font-size: 1.3em;
     /* padding: .5em; */
-    border-left: 1px solid rgb(118, 118, 118);
+    border-left: 1px solid var(--border-color);
     border-radius: .5em;
 }
