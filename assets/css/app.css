@@ -139,6 +139,7 @@ input{
 #chat-container{
   margin: .25em;
   width: 10%;
+  min-width: 30%;
   flex-grow: 1;
   background: rgba(54, 59, 106, 0.332);
   border-radius: .5em;
