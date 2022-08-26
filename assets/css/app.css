@@ -196,6 +196,7 @@ input{
 }
 
 .message{
+  word-break: break-all;
   min-width: 100%;
   color: black;
   margin-top: .5em;
