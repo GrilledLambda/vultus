@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* width: 100%; */
+  max-width: 60%;
   /* max-height: 100%; */
   margin: .25em;
   /* max-height: 60%; */
@@ -26,15 +26,15 @@
 }
 
 .video-stream{
-  object-fit: fill;
+  /* object-fit: fill; */
 }
 
 video {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   /* override other styles to make responsive */
   width: auto      !important;
   height: auto     !important;
-  max-height: 100% !important;
+  /* max-height: 100% !important; */
   border-radius: 1em;
   border: 3px solid rgba(4, 150, 194, 0.488);
   /* transform: rotateY(180deg); */

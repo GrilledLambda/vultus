@@ -71,11 +71,6 @@ defmodule VultusWeb.RoomLive do
 
     user_list = VultusWeb.Presence.list(socket.assigns.topic)
     socket = assign(socket, messages: join_messages ++ leave_messages, user_list: user_list)
-
-    for user <- user_list do
-      IO.inspect(user)
-    end
-
     {:noreply, socket}
   end
 
