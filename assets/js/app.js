@@ -57,7 +57,7 @@ function removeUserConnection(userUuid){
 
 Hooks.InitUser = {
     mounted() {
-        addUserConnection(this.el.dataset.userUuidq)
+        addUserConnection(this.el.dataset.userUuid)
     },
 
     destroyed() {
@@ -66,6 +66,65 @@ Hooks.InitUser = {
 }
 
 
+//---------------------------- Web RTC -----------------------------//
+
+// live view    - LiveView hooks 'this' object.
+// from User    - The user to create the peer connection with.
+// offer        - Stores an SDP offer if passed to function.
+function createPeerConnection(liveView, fromUser, offer) {
+    
+    let newPeerConnection = RTCPeerConnection({
+        iceServers: [
+            {urls: "stun.12connect.com:3478"}
+        ]
+    });
+
+    // Add this new peer connection to `users` object.
+    users[fromUser].peerConnection = newPeerConnection;
+    // Add each local track to the RTCPeerConnection.
+    localSteam.getTracks().forEach(track => newPeerConnection.addTrack(track, localStream));
+
+    // If creating an answer, rather than an initial offer
+    if(offer != undefined) {
+        newPeerConnection.setRemoteDescription({type: "offer", sdp: offer });
+        newPeerConnection.createAnswer()
+            .then((answer) => {
+                newPeerConnection.setLocalDescription(answer)
+                console.log("Sending answer to requester.")
+                liveView.pushEvent("new answer", {toUser: fromUser, description: answer})
+            })
+            .catch((err) => console.log(err));
+    }
+
+    newPeerConnection.onicecanidate = async ({canidate}) => {
+        liveView.pushEvent("new_ice_canidate", {toUser: fromUser, canidate})
+    }
+
+    if (offer === undefined) {
+        newPeerConnection.onnegotiationneeded = async () => {
+          try {
+            newPeerConnection.createOffer()
+              .then((offer) => {
+                newPeerConnection.setLocalDescription(offer)
+                console.log("Sending this OFFER to the requester:", offer)
+                liveView.pushEvent("new_sdp_offer", {toUser: fromUser, description: offer})
+              })
+              .catch((err) => console.log(err))
+          }
+          catch (error) {
+            console.log(error)
+          }
+        }
+      }
+    
+      // When the data is ready to flow, add it to the correct video.
+      newPeerConnection.ontrack = async (event) => {
+        console.log("Track received:", event)
+        document.getElementById(`video-remote-${fromUser}`).srcObject = event.streams[0]
+      }
+    
+      return newPeerConnection;
+}
 
 
 
