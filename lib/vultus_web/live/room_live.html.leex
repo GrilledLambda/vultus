@@ -8,15 +8,9 @@
 <div id="room-container">
 
     <div id="video-container" phx-update="replace">
-<<<<<<< HEAD
             <%# <div class="camera">
                 <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
             </div> %>
-=======
-            <%# <div class="camera"> %>
-                <%# <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video> %>
-            <%# </div> %>
->>>>>>> 2ee96a57cbad35dc47a0c0aadaaf635fc44c8da0
     <%= for user <- @user_list do %>
         <%# if get_user_meta(user, :uuid) != @uuid do %>
         <%#= Phoenix.Socket :log %>
@@ -46,7 +40,8 @@
         <div id="active-users">
 
             <h2> Online Users: </h2>
-            <button id="join-button" class="button" phx-hook="JoinCall">Join Call</button>
+            <button id="join-button" class="button" phx-hook="JoinCall" phx-click="join_call">Join Call</button>
+
             <hr>
             <ul>
             <%= for user <- @user_list do %>
@@ -54,9 +49,31 @@
             <% end %>
 
         <ul>
+        </div>
     </div>
-    </div>
+        <div id="offer-requests">
+            <%= for request <- @offer_requests do %>
+                <span phx-hook="HandleOfferRequest" data-from-user-uuid="<%= request.from_user.uuid %>"> </span>
+            <% end %>
+        </div>
 
+        <div id="sdp-offers">
+            <%= for offer <- @sdp_offers do %>
+                <span phx-hook="HandleSdpOffer" data-from-user-uuid="<%= offer["from_user"] %>" data-sdp="<%= offer["description"]["sdp"] %>" ></span>
+            <% end %>
+        </div>
+
+        <div id="sdp-answers">
+            <%= for answer <- @answers do %>
+                <span phx-hook="HandleAnswer" data-from-user-uuid="<%= answer["from_user"] %>" data-sdp="<%= answer["description"]["sdp"] %>" ></span>
+            <% end %>
+        </div>
+
+        <div id="ice-candidates">
+            <%= for ice_candidate_offer <- @ice_candidate_offers do %>
+                <span phx-hook="HandleIceCandidateOffer" data-from-user-uuid="<%= ice_candidate_offer["from_user"] %>" data-ice-candidate="<%= Jason.encode!(ice_candidate_offer["candidate"]) %>"></span>
+            <% end %>
+        </div>
 </div>
 </div>
 </body>
