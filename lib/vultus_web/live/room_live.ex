@@ -58,7 +58,7 @@ defmodule VultusWeb.RoomLive do
   @impl true
   def handle_event("join_call",_params, socket) do
     for user <- socket.assigns.user_list do
-      send_direct_message(socket.assigns.room_id, user, "request_offers", %{from_user: socket.assigns.username})
+      send_direct_message(socket.assigns.room_id, get_user_meta(user, :uuid), "request_offers", %{from_user: socket.assigns.uuid})
     end
     {:noreply, socket}
   end
@@ -100,7 +100,7 @@ defmodule VultusWeb.RoomLive do
   end
 
   @impl true
-  def handle_info(%{event: "new_answer", payload: payload}, socket) do
+  def handle_info(%{event: "new_answer", payload: payload},  socket) do
     socket = assign(socket, :answers, socket.assigns.answers ++ [payload])
     {:noreply, socket}
   end
@@ -134,6 +134,9 @@ defmodule VultusWeb.RoomLive do
   @impl true
   def handle_info(%{event: "request_offers", payload: request}, socket) do
     socket = assign(socket, :offer_requests, socket.assigns.offer_requests ++ [request])
+    IO.puts("\n\n\n\n\n")
+    IO.inspect(socket.assigns.offer_requests)
+    IO.puts("\n\n\n\n\n")
     {:noreply, socket}
   end
 

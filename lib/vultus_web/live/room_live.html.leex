@@ -8,22 +8,18 @@
 <div id="room-container">
 
     <div id="video-container" phx-update="replace">
-<<<<<<< HEAD
+
             <div class="camera">
-                <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
+                <video class="video-stream" id="local-video" playsinline autoplay="true" muted width="auto"></video>
             </div>
-=======
-            <%# <div class="camera">
-                <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
-            </div> %>
->>>>>>> 939b588fc9f007ff94f09d6bab157c2ff4d0a4b8
+
     <%= for user <- @user_list do %>
-        <%# if get_user_meta(user, :uuid) != @uuid do %>
+        <%= if get_user_meta(user, :uuid) != @uuid do %>
         <%#= Phoenix.Socket :log %>
             <div class="camera" style="background:<%#= get_user_meta(user, :chat_color) %>" >
-                <video class="video-stream" id="video-remote-<%= get_user_meta(user, :uuid) %>" data-user-uuid="<%= get_user_meta(user, :uuid) %>"  playsinline autoplay phx-hook="InitUser"></video>
+                <video class="video-stream" id="video-remote-<%= get_user_meta(user, :uuid) %>" data-user-uuid="<%= get_user_meta(user, :uuid) %>"  playsinline autoplay="true" muted phx-hook="InitUser"></video>
             </div>
-        <%# end %>
+        <% end %>
     <% end %>
     </div>
 
@@ -59,19 +55,19 @@
     </div>
         <div id="offer-requests">
             <%= for request <- @offer_requests do %>
-                <span phx-hook="HandleOfferRequest" data-from-user-uuid="<%= request.from_user.uuid %>"> </span>
+                <span phx-hook="HandleOfferRequest" data-from-user-uuid="<%= request.from_user %>"> </span>
             <% end %>
         </div>
 
         <div id="sdp-offers">
             <%= for offer <- @sdp_offers do %>
-                <span phx-hook="HandleSdpOffer" data-from-user-uuid="<%= offer["from_user"] %>" data-sdp="<%= offer["description"]["sdp"] %>" ></span>
+                <span  phx-hook="HandleSdpOffer" data-from-user-uuid="<%= offer["from_user"] %>" data-sdp="<%= offer["description"]["sdp"] %>" ></span>
             <% end %>
         </div>
 
         <div id="sdp-answers">
             <%= for answer <- @answers do %>
-                <span phx-hook="HandleAnswer" data-from-user-uuid="<%= answer["from_user"] %>" data-sdp="<%= answer["description"]["sdp"] %>" ></span>
+                <span  phx-hook="HandleAnswer" data-from-user-uuid="<%= answer["from_user"] %>" data-sdp="<%= answer["description"]["sdp"] %>" ></span>
             <% end %>
         </div>
 

@@ -8,32 +8,40 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-
+var localStream 
 
 //---------------------------- Local Stream -----------------------------//
-async function initStream() {
-    try{
-        // Gets local media from browser and stores it in steam.
-        const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true,
-            width: "1280" });
+function initStream() {
+    // try{
+    //     // Gets local media from browser and stores it in steam.
+    //     const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
         
-        // Stores stream in global constant.
-        localSteam = stream
+    //     // Stores stream in global constant.
+    //     localStream = stream
         
-        // Sets local-video element to stream from webcam.
-        document.getElementById("local-video").srcObject = stream;
+    //     // Sets local-video element to stream from webcam.
+    //     document.getElementById("local-video").srcObject = stream;
 
-    } catch (e) {
-        console.log(e)
-    }
+    // } catch (e) {
+    //     console.log(e)
+    // }
+    video = document.getElementById("local-video")
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function (stream) {
+            video.srcObject = stream;
+            localStream = stream;
+          })
+          .catch(function (err0r) {
+            console.log("Something went wrong!");
+          });
+      }
 }
 
 let Hooks = {}
 Hooks.JoinCall = {
-    mounted() {
-        initStream();
+    mounted () {
+        initStream()
     }
 }
 
@@ -73,16 +81,16 @@ Hooks.InitUser = {
 // offer        - Stores an SDP offer if passed to function.
 function createPeerConnection(liveView, fromUser, offer) {
     
-    let newPeerConnection = RTCPeerConnection({
+    let newPeerConnection = new RTCPeerConnection({
         iceServers: [
-            {urls: "stun.12connect.com:3478"}
+            {urls: "stun:littlechat.app:3478"}
         ]
     });
 
     // Add this new peer connection to `users` object.
     users[fromUser].peerConnection = newPeerConnection;
     // Add each local track to the RTCPeerConnection.
-    localSteam.getTracks().forEach(track => newPeerConnection.addTrack(track, localStream));
+    localStream.getTracks().forEach(track => newPeerConnection.addTrack(track, localStream));
 
     // If creating an answer, rather than an initial offer
     if(offer != undefined) {
@@ -91,7 +99,7 @@ function createPeerConnection(liveView, fromUser, offer) {
             .then((answer) => {
                 newPeerConnection.setLocalDescription(answer)
                 console.log("Sending answer to requester.")
-                liveView.pushEvent("new answer", {toUser: fromUser, description: answer})
+                liveView.pushEvent("new_answer", {toUser: fromUser, description: answer})
             })
             .catch((err) => console.log(err));
     }
@@ -120,7 +128,14 @@ function createPeerConnection(liveView, fromUser, offer) {
       // When the data is ready to flow, add it to the correct video.
       newPeerConnection.ontrack = async (event) => {
         console.log("Track received:", event)
-        document.getElementById(`video-remote-${fromUser}`).srcObject = event.streams[0]
+        console.log("\n fromUser ==>", fromUser, "\n", event.streams[0], "\n")
+        remote_stream = new MediaStream();
+        event.streams[0].getTracks().forEach(track => {
+            remote_stream.addTrack(track)
+        }) 
+        remote_camera = document.getElementById(`video-remote-${fromUser}`)
+        remote_camera.srcObject =  remote_stream//remote_stream
+        // remote_camera.play()
       }
     
       return newPeerConnection;
@@ -153,10 +168,10 @@ Hooks.HandleSdpOffer = {
         let data = this.el.dataset
         let fromUser = data.fromUserUuid
         let sdp = data.sdp
-
+        
         if (sdp != "") {
             console.log("new sdp OFFER from: ", data.fromUserUuid, data.sdp)
-
+            
             createPeerConnection(this, fromUser, sdp)
         }
     }
@@ -167,8 +182,9 @@ Hooks.HandleAnswer = {
         let data = this.el.dataset
         let fromUser = data.fromUserUuid
         let sdp = data.sdp
-        let peerConnection = users[fromUserUuid].peerConnection
-
+        let peerConnection = users[fromUser].peerConnection
+        
+        console.log("YO THIS IS THE fromUser ===>", fromUser)
         if (sdp != "") {
             console.log("new sdp ANSWER from: ", fromUser, sdp)
             peerConnection.setRemoteDescription({type: "answer", sdp: sdp})
