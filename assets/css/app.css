@@ -139,6 +139,7 @@ input{
 #chat-container{
   margin: .25em;
   width: 10%;
+  min-width: 30%;
   flex-grow: 1;
   background: rgba(54, 59, 106, 0.332);
   border-radius: .5em;
@@ -195,6 +196,7 @@ input{
 }
 
 .message{
+  word-break: break-all;
   min-width: 100%;
   color: black;
   margin-top: .5em;

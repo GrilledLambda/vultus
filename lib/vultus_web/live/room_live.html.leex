@@ -8,9 +8,9 @@
 <div id="room-container">
 
     <div id="video-container" phx-update="replace">
-            <%# <div class="camera"> %>
-                <%# <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video> %>
-            <%# </div> %>
+            <div class="camera">
+                <video class="video-stream" id="local-video" playsinline autoplay muted width="auto"></video>
+            </div>
     <%= for user <- @user_list do %>
         <%# if get_user_meta(user, :uuid) != @uuid do %>
         <%#= Phoenix.Socket :log %>
